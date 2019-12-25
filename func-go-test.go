@@ -2,11 +2,19 @@ package main
 
 import "fmt"
 
-func somar(a int, b int) int {
-	return a + b
+func intSeq() func() int {
+	i := 0
+	return func() int {
+		i += 1
+		return i
+	}
 }
 
 func main() {
-	res := somar(1, 2)
-	fmt.Println("1 + 2 = ", res)
+	nextInt := intSeq()    // Aqui "nextInt" recebe como valor a função intSeq
+	fmt.Println(nextInt()) // Printa 1
+	fmt.Println(nextInt()) // Printa 2
+	fmt.Println(nextInt()) // Printa 3
+	newInts := intSeq()
+	fmt.Println(newInts()) // Printa 1
 }
